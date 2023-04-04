@@ -1,0 +1,31 @@
+{
+	"image": "ktbs-mlspace/torch:python3.8-cuda11.6.2-cudnn8-runtime-ubuntu20.04",
+	// "image": "ktbs-mlspace/torch:python3.10-cuda11.7.1-cudnn8-runtime-ubuntu22.04",
+	"customizations": {
+		"vscode": {
+			"settings": {
+				"terminal.integrated.profiles.linux": {
+					"bash": {
+						"path": "/bin/bash"
+					}
+				}
+			},
+			"extensions": [
+				"ms-python.python",
+				"mutantdino.resourcemonitor"
+			]
+		}
+	},
+	"runArgs": [
+		"--gpus", "all",
+		"--shm-size", "16gb"
+	],
+	"mounts": [
+		"source=/data/,target=/data/,type=bind,consistency=cached",
+		// "source=/data2/,target=/data2/,type=bind,consistency=cached"
+
+	],
+	"forwardPorts": [
+		5000
+	]
+}
