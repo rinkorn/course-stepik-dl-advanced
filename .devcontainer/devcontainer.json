@@ -1,5 +1,5 @@
 {
-	"image": "ktbs-mlspace/torch:python3.10-cuda12.0.1-cudnn8-runtime-ubuntu22.04",
+	"image": "mlspace/torch:python3.10-cuda12.0.1-cudnn8-runtime-ubuntu22.04",
 	"customizations": {
 		"vscode": {
 			"settings": {
