@@ -1,5 +1,5 @@
 {
-	"image": "mlspace/torch:python3.10-cuda12.0.1-cudnn8-runtime-ubuntu22.04",
+	"image": "mlspace/torch:python3.10-cuda12.1.1-cudnn8-runtime-ubuntu22.04",
 	"customizations": {
 		"vscode": {
 			"settings": {
@@ -11,7 +11,9 @@
 			},
 			"extensions": [
 				"ms-python.python",
-				"mutantdino.resourcemonitor"
+				"ms-toolsai.jupyter",
+				"mutantdino.resourcemonitor",
+				"mhutchie.git-graph"
 			]
 		}
 	},
