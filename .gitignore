@@ -1,5 +1,12 @@
+.vscode
+
 hw14/data/*
 hw14/models/*
 # hw16/data/*
 hw16/models/*
 hw16/history/*
+hw19/models/*
+hw19/history/*
+hw19/mnist_data/*
+hw19/lfw-deepfunneled/*
+hw19/lfw_attributes.txt
