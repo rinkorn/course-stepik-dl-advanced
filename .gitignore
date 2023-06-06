@@ -1,4 +1,4 @@
-.vscode
+.vscode/
 
 hw14/data/*
 hw14/models/*
@@ -10,3 +10,6 @@ hw19/history/*
 hw19/mnist_data/*
 hw19/lfw-deepfunneled/*
 hw19/lfw_attributes.txt
+hw21/generated-fixed/*
+hw21/generated-noise/*
+hw21/models/*

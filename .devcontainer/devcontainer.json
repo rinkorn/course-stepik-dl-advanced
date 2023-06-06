@@ -10,10 +10,17 @@
 				}
 			},
 			"extensions": [
-				"ms-python.python",
-				"ms-toolsai.jupyter",
-				"mutantdino.resourcemonitor",
-				"mhutchie.git-graph"
+                "ms-python.python",
+                "ms-toolsai.jupyter",
+                "njpwerner.autodocstring",
+                "charliermarsh.ruff",
+                "mutantdino.resourcemonitor",
+                "mhutchie.git-graph",
+                "GitLab.gitlab-workflow",
+                "iterative.dvc",
+                "tamasfe.even-better-toml",
+                "redhat.vscode-yaml",
+                "wangweixuan.yithemes"
 			]
 		}
 	},
