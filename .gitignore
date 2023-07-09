@@ -1,4 +1,5 @@
 .vscode/
+.devcontainer/
 
 hw14/data/*
 hw14/models/*
