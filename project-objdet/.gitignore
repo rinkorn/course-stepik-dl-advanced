@@ -1,0 +1,10 @@
+data
+.devcontainer/
+scripts2/
+dags/*
+checkpoints/*
+models/*
+log/*
+logs/*
+tests/
+extra/*

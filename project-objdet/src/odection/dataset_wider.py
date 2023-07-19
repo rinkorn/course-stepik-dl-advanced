@@ -1,11 +1,12 @@
 # %%
-import pandas as pd
 from pathlib import Path
-import torch  # noqa: F401
-from torch.utils.data import Dataset
-from PIL import Image
-import matplotlib.pyplot as plt
+
 import matplotlib.patches as patches
+import matplotlib.pyplot as plt
+import pandas as pd
+import torch  # noqa: F401
+from PIL import Image
+from torch.utils.data import Dataset
 
 
 def parse_wider_face_train_bbx_gt(fn):
@@ -46,22 +47,22 @@ def parse_wider_face_train_bbx_gt(fn):
 
 
 class WiderDataset(Dataset):
-    def __init__(self, path_images, path_labels="wider_face_train_bbx_gt.txt"):
+    def __init__(self, path_images: Path, path_labels: Path):
         self.filenames = list(Path(path_images).rglob("*.jpg"))
         self.labels = parse_wider_face_train_bbx_gt(path_labels)
 
     def __len__(self):
         return len(self.filenames)
 
-    def __getitem__(self, index):
-        fn = self.filenames[index]
+    def __getitem__(self, idx):
+        fn = self.filenames[idx]
         fn_key = f"{fn.parent.name}/{fn.name}"
         image = Image.open(fn)
         values = self.labels.loc[[fn_key]].values
         return image, values
 
-    def imshow_item(self, index):
-        image, values = self[index]
+    def imshow_item(self, idx):
+        image, values = self[idx]
         fig, ax = plt.subplots()
         ax.imshow(image)
         for item in values:
