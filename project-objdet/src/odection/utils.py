@@ -8,6 +8,7 @@ import numpy as np
 import torch
 import torch.nn.functional as F
 from torchvision.ops.boxes import box_convert, box_iou
+from zmq import device
 
 coco_classes = [
     "background",
@@ -219,12 +220,13 @@ class Encoder:
         max_output : maximum number of output bboxes
     """
 
-    def __init__(self, dboxes):
+    def __init__(self, dboxes, device=torch.device("cpu")):
         self.dboxes = dboxes(order="ltrb")
         self.dboxes_xywh = dboxes(order="xywh").unsqueeze(dim=0)
         self.nboxes = self.dboxes.size(0)
         self.scale_xy = dboxes.scale_xy
         self.scale_wh = dboxes.scale_wh
+        self.device = device
 
     def encode(self, bboxes_in, labels_in, criteria=0.5):
         ious = box_iou(bboxes_in, self.dboxes)
@@ -251,12 +253,8 @@ class Encoder:
         Do scale and transform from xywh to ltrb
         suppose input Nx4xnum_bbox Nxlabel_numxnum_bbox
         """
-        if bboxes_in.device == torch.device("cpu"):
-            self.dboxes = self.dboxes.cpu()
-            self.dboxes_xywh = self.dboxes_xywh.cpu()
-        else:
-            self.dboxes = self.dboxes.cuda()
-            self.dboxes_xywh = self.dboxes_xywh.cuda()
+        self.dboxes = self.dboxes.to(bboxes_in.device)
+        self.dboxes_xywh = self.dboxes_xywh.to(bboxes_in.device)
 
         bboxes_in = bboxes_in.permute(0, 2, 1)
         scores_in = scores_in.permute(0, 2, 1)
@@ -320,12 +318,12 @@ class Encoder:
             labels_out.extend([i] * len(candidates))
 
         if not bboxes_out:
-            return [torch.tensor([]) for _ in range(3)]
+            return [torch.tensor([], device=self.device) for _ in range(3)]
 
         bboxes_out, labels_out, scores_out = (
-            torch.cat(bboxes_out, dim=0),
-            torch.tensor(labels_out, dtype=torch.long),
-            torch.cat(scores_out, dim=0),
+            torch.cat(bboxes_out, dim=0).to(self.device),
+            torch.tensor(labels_out, dtype=torch.long, device=self.device),
+            torch.cat(scores_out, dim=0).to(self.device),
         )
 
         _, max_ids = scores_out.sort(dim=0)

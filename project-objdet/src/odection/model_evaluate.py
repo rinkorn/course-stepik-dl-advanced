@@ -23,9 +23,11 @@ def evaluate(model, test_loader, epoch, writer, encoder, nms_threshold):
                     result = encoder.decode_batch(ploc_i, plabel_i, nms_threshold, 200)[
                         0
                     ]
-                except:
-                    print(f"No object detected in idx: {idx}")
-                    continue
+                except Exception as exc:
+                    print(exc)
+                    raise ValueError(f"No object detected in idx: {idx}")
+                    # print(f"No object detected in idx: {idx}")
+                    # continue
 
                 height, width = img_size[idx]
                 loc, label, prob = (r.cpu().numpy() for r in result)

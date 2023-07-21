@@ -2,24 +2,23 @@
 
 __version__ = "1.0.0"
 
-
-# from src.model import SSDLite, MobileNetV2
 from .dataset_coco import CocoDataset, collate_fn
 from .loss import Loss
 from .model_evaluate import evaluate
 from .ssd import SSD, ResNet
 from .transform import SSDTransformer
-from .utils import Encoder, coco_classes, generate_dboxes
+from .utils import Encoder, coco_classes, colors, generate_dboxes
 
 __all__ = [
+    "coco_classes",
     "CocoDataset",
     "collate_fn",
-    "Loss",
-    "SSD",
-    "ResNet",
-    "evaluate",
-    "SSDTransformer",
+    "colors",
     "Encoder",
-    "coco_classes",
+    "evaluate",
     "generate_dboxes",
+    "Loss",
+    "ResNet",
+    "SSD",
+    "SSDTransformer",
 ]
