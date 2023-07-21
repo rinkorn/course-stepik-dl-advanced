@@ -1,5 +1,19 @@
+__pycache__/
+*__pycache__/
+# .ipynb_checkpoints/
+# *.ipynb_checkpoints/
+*.py[cod]
+*$py.class
+temp*
+.dockerignore
+*.old
+*.egg-info/*
+env/
+venv/
+.env/
+.venv/
 .vscode/
-.devcontainer/
+
 
 hw14/data/*
 hw14/models/*
